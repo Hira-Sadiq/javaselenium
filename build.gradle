@@ -1,0 +1,94 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+plugins {
+    id 'java'
+    id("io.qameta.allure") version "2.8.1"
+}
+
+group 'JavaSelenium'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.current()
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.seleniumhq.selenium:selenium-api:3.141.59'
+    compile 'org.apache.httpcomponents:httpclient:4.5.4'
+    compile 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
+    compile 'org.apache.httpcomponents:httpcore:4.4.8'
+    compile 'org.seleniumhq.selenium:selenium-support:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-ie-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-edge-driver:3.141.59'
+    compile 'org.seleniumhq.selenium:selenium-safari-driver:3.141.59'
+    compile 'commons-configuration:commons-configuration:1.6'
+    compile 'org.testng:testng:7.0.0-beta3'
+    compile 'commons-io:commons-io:2.6'
+    compile 'ch.qos.logback:logback-classic:0.9.26'
+    compile 'com.google.inject:guice:4.2.2'
+    compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
+    compile group: 'org.uncommons', name: 'reportng', version: '1.1.4'
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.4.0'
+    compile group: 'io.qameta.allure', name: 'allure-gradle', version: '2.5'
+    compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.5'
+    compile group: 'org.json', name: 'json', version: '20090211'
+}
+
+configurations.all {
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}
+
+test {
+    outputs.upToDateWhen { return false }
+    systemProperty "browserName", System.getProperty("browserName")
+    systemProperty "execution.mode", System.getProperty("execution.mode")
+    systemProperty "quit.driver", System.getProperty("quit.driver")
+    systemProperty "retry.mode", System.getProperty("retry.mode")
+    systemProperty "suitXmlFile", System.getProperty("suitXmlFile")
+    systemProperty "url", System.getProperty("url")
+    systemProperty "grid", System.getProperty("grid")
+
+    def suiteFileName = System.getProperty("suitXmlFile")
+
+    useTestNG() {
+        useDefaultListeners = true
+        suiteXmlFiles << file("src/test/resources/suites/" + suiteFileName)
+        setSuiteXmlFiles(suiteXmlFiles)
+    }
+
+    systemProperties "org.uncommons.reportng.escape-output": "false"
+    options {
+        listeners << 'org.uncommons.reportng.HTMLReporter'
+        listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+    }
+
+    test.onlyIf { !Boolean.getBoolean('skipTests') }
+
+    jvmArgs "-noverify"
+    jvmArgs "-Xverify:none"
+
+}
+test.dependsOn("cleanTestReports")
+
+task cleanTestReports(type: Delete) {
+    delete "${project.buildDir}/reports"
+    delete "${project.buildDir}/allure-results"
+}
+
+allure {
+    autoconfigure = true
+    aspectjweaver = true
+    allureJavaVersion = '2.12.1'
+}
