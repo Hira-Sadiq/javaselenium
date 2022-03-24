@@ -1,11 +1,11 @@
-package de.check24.tests;
+package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import de.check24.pageobjects.TodosPage;
-import de.check24.utilities.BaseTest;
+import TodosPage;
+import utilities.BaseTest;
 
 public class CompleteActiveAllToDo extends BaseTest {
 
