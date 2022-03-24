@@ -11,8 +11,6 @@ Framework architecture also provides support for following three additional brow
 
 •	Safari
 
-•	Internet Explorer
-
 •	Edge
 ```
 
@@ -46,13 +44,11 @@ MAC: ./gradlew test -i -DsuitXmlFile=smoketests.xml
 
 **Test Run in Distributed Environment**
 
-• To run tests using Selenium Grid, update following two parameters 'execution.mode=grid' in [local.properties file.
+• To run tests using Selenium Grid, update following two parameters 'execution.mode=grid' in local.properties file.
 ```python
 execution.mode=grid
-grid=http://MachineIP-HostName:4444/wd/hub (Path to Selenium/Zalenium Grid)
+grid=http://MachineIP-HostName:4444/wd/hub (Path to Selenium Grid)
 ```
-
-Step by step instructions to create Grid can be found here: [Selenium/Zalenium Grid]
 
 **Gradle Reports**
  
