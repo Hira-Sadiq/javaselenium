@@ -53,13 +53,6 @@ configurations.all {
 test {
     outputs.upToDateWhen { return false }
     systemProperty "browserName", System.getProperty("browserName")
-    systemProperty "execution.mode", System.getProperty("execution.mode")
-    systemProperty "quit.driver", System.getProperty("quit.driver")
-    systemProperty "retry.mode", System.getProperty("retry.mode")
-    systemProperty "suitXmlFile", System.getProperty("suitXmlFile")
-    systemProperty "url", System.getProperty("url")
-    systemProperty "grid", System.getProperty("grid")
-
     def suiteFileName = System.getProperty("suitXmlFile")
 
     useTestNG() {
