@@ -1,11 +1,11 @@
-package de.check24.tests;
+package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import de.check24.pageobjects.TodosPage;
-import de.check24.utilities.BaseTest;
+import pageobjects.TodosPage;
+import utilities.BaseTest;
 
 public class ClearCompletedToDo extends BaseTest {
 
@@ -16,10 +16,10 @@ public class ClearCompletedToDo extends BaseTest {
 
         log.info("Adding 6 todos");
         TodosPage todosPage = new TodosPage(driver)
-                .enterTodo("KFZ")
-                .enterTodo("Baufi")
-                .enterTodo("Reise")
-                .enterTodo("Kredite");
+                .enterTodo("Test1")
+                .enterTodo("Test2")
+                .enterTodo("Test4")
+                .enterTodo("Test3");
 
         log.info("Selecting todos # 4 from my list");
         todosPage.selectNthTodo(2).selectNthTodo(3);
