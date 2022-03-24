@@ -1,4 +1,4 @@
-package de.check24.tests;
+package tests;
 
 import org.json.JSONException;
 import org.testng.Assert;
@@ -11,11 +11,11 @@ public class TransactioMoveTest {
 
     String request = "{\n" +
             "\"sourceSsoUser\": {\n" +
-            "\t\"email\":\"kfz-testing-auto-kb1@check24.de\",\n" +
+            "\t\"email\":\"test@test.com\",\n" +
             "\t\"userId\" :84297531\n" +
             "},\n" +
             "\"targetSsoUser\": {\n" +
-            "\t\"email\":\"kfz-testing-android-smoke@check24.de\",\n" +
+            "\t\"email\":\"test2@test.com\",\n" +
             "    \"userId\" :74874707\n" +
             "},\n" +
             "\"actionId\": \"1402-4546-4150-08\"\n" +
