@@ -1,4 +1,4 @@
-package de.check24.tests;
+package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
